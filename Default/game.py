@@ -1,6 +1,5 @@
 def writeWebPage(coins, mission, param3):
     """ The following part of the program should regenerate a webpage."""
-	if(
     print """
 		<html>
 		<head>
@@ -222,10 +221,10 @@ def writeWebPage(coins, mission, param3):
 
 		""" %(coins, mission)
 
-def updateGame(answer, coins):
-	   if(answer = "right"):
-		writeWebPage(coins + 50, "One small step for man, one giant leap for man kind.", param3)
-	else:
-		writeWebPage(coins - 50, "Housten, we have a problem.", param3)
-	
+def updateGame(answer, coins, param3):
+    if answer == "right":
+        writeWebPage(coins + 50, "One small step for man, one giant leap for man kind.", param3)
+    else:
+        writeWebPage(coins - 50, "Housten, we have a problem.", param3)
+        
 writeWebPage(1,1,1)
