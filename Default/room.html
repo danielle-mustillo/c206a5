@@ -74,14 +74,15 @@
 		
 		#mission {
 			padding: 20px;
-			margin-left: auto;
-			margin-right: auto;
+			
 			background-image : url("moon.jpg");
 			background-size : 100% 100%;
 			min-height : 400px;
 			min-width : 400px;
 			max-height : 400px;
 			max-width : 400px;
+			margin-left: auto;
+			margin-right: auto;
 		}
 		
 		#text-box{
@@ -140,14 +141,19 @@
 </head>
 
 <body>
-<input type="hidden" name="coins" value="100">
+
 <div id="text-box">
 	<h1> The Mission
 	</h1>
-	<a href="http://www.cs.mcgill.ca/~dmusti/comp206/riddle.html">
-		<div id="mission">
-		</div>
-	</a>
+	<form action="http://www.cs.mcgill.ca/~dmusti/comp206/riddle.html">
+		<input type="hidden" name="coins" value="100">
+		<input type="submit" value="" id="mission"> </input>
+	</form>
+</div>
+
+<div id="text-box">
+	<p> Mission Status: <p>
+	<p> In Orbit <p>
 </div>
 	
 <div id="location-box">
