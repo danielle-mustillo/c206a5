@@ -1,11 +1,111 @@
 <html>
-<head>
-	<title> The title of the page </title>
-</head>
+	<head>
+		<title> Welcome page </title>
+		<style>
+	        img.background {
+	        min-height: 100%;
+		    min-width: 2000px;
+	
+		    width: 100%;
+		    height: auto;
+	
+		    position: fixed;
+		    top: 0;
+		    left: 0;
+		    }
 
-<body>
-	HELLO WORLD
-</body>
+		    /* allow to recenter if the browser window is smaller than the image*/
+	     	@media screen and (max-width: 2000px) { 
+				img.background {
+	    		left: 50%;
+    			margin-left: -1000px;   /* 50% */
+  				}
+			}
+				
+			#text-box{
+			 	position: relative; 
+				width: 900px; 
+				margin: 20px auto;
+				padding: 10px; 
+				background-color: rgba(49,97,145,0.8);
+				/*prefix to support box-shadow*/
+				-webkit-box-shadow: 0 0 20px black; 
+				-moz-box-shadow: 0 0 20px black; 
+				box-shadow: 0 0 20px black;
+			}
+			p{
+			 	font : 20px Verdana, Serif;
+			 	margin : 0 0 20px 0;
+			 	text-indent : 30px;
+			 	color : e8e5e0; 
+			 }
 
+			#image-box{
+			 	position: relative; 
+				width: 100px; 
+				margin: 20px auto;
+				padding: 1px; 
+				background-color: rgba(49,97,145,0.7);
+				/*prefix to support box-shadow*/
+				-webkit-box-shadow: 0 0 20px black; 
+				-moz-box-shadow: 0 0 20px black; 
+				box-shadow: 0 0 20px black;
+			}
+			p{
+			 	font : 20px Verdana, Serif;
+			 	margin : 0 0 20px 0;
+			 	text-indent : 30px;
+			 	color : #e8e5e0; 
+			}
+			/* set up a new font*/
+			@font-face{
+			font-family : nasa;
+			src: url(nasa.ttf);
+			}
+
+		    h1{
+			color:e8e5e0;
+			font-family:nasa
+			}	
+		</style>	
+	</head>
+
+	<body>
+	<img src="welcome.jpg" class="background"</img>
+	<div id="text-box">
+    	<h1 align="center"> The International Space Station Room </h1>
+	</div>
+	<div id="text-box">
+		<p>The International Space Station (ISS) is a space station, or a habitable artificial satellite in low Earth orbit. The ninth space station to be inhabited by crews, it follows the Soviet and later Russian Salyut, Almaz, and Mir stations, and Skylab from the U.S. The ISS is a modular structure whose first component was launched in 1998. Now the largest artificial body in orbit, it can often be seen at the appropriate time with the naked eye from Earth. The ISS consists of pressurised modules, external trusses, solar arrays and other components. ISS components have been launched by American Space Shuttles as well as Russian Proton and Soyuz rockets. Budget constraints led to the merger of three space station projects with the Japanese Kibō module and Canadian robotics. In 1993 the partially built components for a Soviet/Russian space station Mir-2, the proposed American Freedom, and the proposed European Columbus merged into a single multinational programme. The ISS is arguably the most expensive single item ever constructed.<br>
+		Source : Wikipedia </p>
+	</div>
+	<div id="text-box">
+		<p>A massively multiplayer online game (also called MMO and MMOG) is a multiplayer video game which is capable of supporting large numbers of players simultaneously. By necessity, they are played on the Internet. Many games have at least one persistent world, however others just have large numbers of players competing at once in one form or another without any lasting effect to the world at all. 
+		MMOGs can enable players to cooperate and compete with each other on a large scale, and sometimes to interact meaningfully with people around the world. They include a variety of gameplay types, representing many video game genres. <br>
+
+		Source : Wikipedia <br><br>
+		</p>
+	</div>
+	<div id="text-box">
+		<p>Below is a list of popular MMO games
+			<ul>
+				<li><a href="http://www.eveonline.com/" target="_blank" style="color: #e8e5e0"> Eve Online</a>
+				<li><a href="http://us.battle.net/en/int?r=wow" target="_blank"  style="color: #e8e5e0"> World Of Warcraft</a>
+				<li><a href="https://www.planetside2.com/" target="_blank"  style="color: #e8e5e0"> Planetside 2</a>
+				<li><a href="http://warthunder.com/" target="_blank"  style="color: #e8e5e0"> War Thunder</a>
+				<li><a href="http://worldoftanks.com/" target="_blank"  style="color: #e8e5e0"> World of Tanks</a>
+				<li><a href="http://world.needforspeed.com/" target="_blank"  style="color: #e8e5e0"> Need for Speed: World</a>
+			</ul>
+		</p>	
+	</div>
+	<div id="text-box">
+		<p>
+		Our MMO consists of a collection of rooms each contaning a mini-game. Each room is linked to 4 other rooms. To access a room, an username and password must be entered. This room represents the ISS and contains a riddle the user must solve. A breif description of the ISS is available below. To access the room, user should proceed to the hatch.
+		</p>
+	</div>
+	<div id="image-box">
+	<a href="/~hzhao28/ass5/login.html">
+	<img border="0" src="hatch.jpg" alt="Login" width="200" height="200"></a>
+	</div>
+	</body>
 </html>
-
