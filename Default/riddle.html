@@ -1,0 +1,133 @@
+<html>
+		<head>
+			<style type="text/css">
+				/* set up a new font*/
+				@font-face{
+					font-family : nasa;
+					src: url(nasa.ttf);
+				}
+				body {
+					background-image: url('interior.jpg');
+					background-size: 100% 100%;
+					max-height: 100%;
+					max-width: 100%;
+					margin-left : auto;
+					margin-right : auto;
+					background-attachment:fixed;
+					background-position: center;
+					
+					top: 0;
+					left: 0;
+				}
+				
+				#button {
+					padding: 20px;
+					background-image : url("hatch_big.jpg");
+					background-size : 100% 100%;
+					min-height : 150px;
+					min-width : 200px;
+					max-height : 200px;
+					max-width : 200px;
+				}
+				
+				#mission {
+					padding: 20px;
+					margin-left: auto;
+					margin-right: auto;
+					background-image : url("moon.jpg");
+					background-size : 100% 100%;
+					min-height : 400px;
+					min-width : 400px;
+					max-height : 400px;
+					max-width : 400px;
+				}
+				
+				#text-box{
+					width: 600px;
+					margin: 20px auto;
+					padding: 10px;
+					background-color: rgba(25,25,25,0.9);
+					/*prefix to support box-shadow*/
+					-webkit-box-shadow: 0 0 20px black;
+					-moz-box-shadow: 0 0 20px black;
+					box-shadow: 0 0 20px black;
+				}
+				
+				#location-box{
+					width: 600px;
+					margin: 20px auto;
+					padding: 10px;
+					background-color: rgba(125,125,125,0.7);
+					/*prefix to support box-shadow*/
+					-webkit-box-shadow: 0 0 20px black;
+					-moz-box-shadow: 0 0 20px black;
+					box-shadow: 0 0 20px black;
+				}
+				
+				#pad {
+					padding : 20px;
+				}
+				
+				#image-box{
+					background-image : url("hatch_big.jpg");
+					position: relative;
+					min-height: 100px
+					min-width: 100px;
+					margin: 20px auto;
+					padding: 1px;
+					background-color: rgba(49,97,145,0.7);
+					/*prefix to support box-shadow*/
+					-webkit-box-shadow: 0 0 20px black;
+					-moz-box-shadow: 0 0 20px black;
+					box-shadow: 0 0 20px black;
+				}
+				p{
+					text-align : justify;
+					font : 20px nasa, Serif;
+					margin : 0 0 0px 0;
+					color : f9f6f2;
+				}
+				a, h1{
+					text-align : center;
+					color:f9f6f2;
+					font-family:nasa
+				}
+				
+				
+				</style>
+		</head>
+
+<body>
+	<div id="text-box">
+	<h1> Welcome to your mission </h1>
+	</div>
+
+	<div id="location-box">
+	<p> The fate of humanity rests in your hands. Answer this riddle to destroy the alien invasion!!!</p>
+		<br>
+		
+	<p> Why didn't the sun go to college? </p>
+		<form name="answer" action="game.py" method="get">
+			<table border="0">
+				<tr>
+					<td> <p> Answer: </p> </td>
+					<td>  <input type="radio" name="answer" value="right"> Because it already had a million degrees! </td>
+					<td>  <input type="radio" name="answer" value="wrong"> Because it burned all the bridges there! </td>
+				</tr>
+				<tr>
+					<td> </td>
+					<td> <input type="submit" value="Answer"> </td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div id="text-box">
+		<p> Because it already had a million degrees! </p>
+		<br>
+		<p> <a href="http://www.cs.mcgill.ca/~dmusti/comp206/room.html">Back to Command Center </a> </p>
+	</div>
+		
+		
+</body>
+
+</html>

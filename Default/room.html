@@ -1,0 +1,211 @@
+<html>
+<head>
+	<style type="text/css">
+		/* set up a new font*/
+		@font-face{
+			font-family : nasa;
+			src: url(nasa.ttf);
+		}
+		body {
+			background-image: url('interior.jpg');
+			background-size: 100% 100%;
+			max-height: 100%;
+			max-width: 100%;
+			margin-left : auto;
+			margin-right : auto;
+			background-attachment:fixed;
+			background-position: center;
+			
+			top: 0;
+			left: 0;
+		}
+
+		#button {
+			padding: 20px;
+			background-image : url("hatch_big.jpg");
+			background-size : 100% 100%;
+			min-height : 150px;
+			min-width : 200px;
+			max-height : 200px;
+			max-width : 200px;
+		}
+
+		#cupola {
+			padding: 20px;
+			background-image : url("cupola.jpg");
+			background-size : 100% 100%;
+			min-height : 200px;
+			min-width : 200px;
+			max-height : 200px;
+			max-width : 200px;
+		}
+
+		#tranquility {
+			padding: 20px;
+			background-image : url("tranquility.jpg");
+			background-size : 100% 100%;
+			min-height : 185px;
+			min-width : 200px;
+			max-height : 200px;
+			max-width : 200px;
+		}
+
+		#destiny {
+			padding: 20px;
+			background-image : url("destiny.jpg");
+			background-size : 100% 100%;
+			min-height : 185px;
+			min-width : 200px;
+			max-height : 200px;
+			max-width : 200px;
+		}
+
+		#exoplanet {
+			padding: 20px;
+			background-image : url("exoplanet.jpg");
+			background-size : 100% 100%;
+			min-height : 186px;
+			min-width : 200px;
+			max-height : 200px;
+			max-width : 200px;
+		}
+
+
+		
+		#mission {
+			padding: 20px;
+			margin-left: auto;
+			margin-right: auto;
+			background-image : url("moon.jpg");
+			background-size : 100% 100%;
+			min-height : 400px;
+			min-width : 400px;
+			max-height : 400px;
+			max-width : 400px;
+		}
+		
+		#text-box{
+			width: 600px;
+			margin: 20px auto;
+			padding: 10px;
+			background-color: rgba(25,25,25,0.9);
+			/*prefix to support box-shadow*/
+			-webkit-box-shadow: 0 0 20px black;
+			-moz-box-shadow: 0 0 20px black;
+			box-shadow: 0 0 20px black;
+		}
+		
+		#location-box{
+			width: 600px;
+			margin: 20px auto;
+			padding: 10px;
+			background-color: rgba(125,125,125,0.7);
+			/*prefix to support box-shadow*/
+			-webkit-box-shadow: 0 0 20px black;
+			-moz-box-shadow: 0 0 20px black;
+			box-shadow: 0 0 20px black;
+		}
+		
+		#pad {
+			padding : 20px;
+		}
+		
+		#image-box{
+			background-image : url("hatch_big.jpg");
+			position: relative;
+			min-height: 100px
+			min-width: 100px;
+			margin: 20px auto;
+			padding: 1px;
+			background-color: rgba(49,97,145,0.7);
+			/*prefix to support box-shadow*/
+			-webkit-box-shadow: 0 0 20px black;
+			-moz-box-shadow: 0 0 20px black;
+			box-shadow: 0 0 20px black;
+		}
+		p{
+			text-align : center;
+			font : 20px nasa, Serif;
+			margin : 0 0 0px 0;
+			color : f9f6f2;
+		}
+		a, h1{
+			text-align : center;
+			color:f9f6f2;
+			font-family:nasa
+		}
+		
+		
+		</style>
+</head>
+
+<body>
+<input type="hidden" name="coins" value="100">
+<div id="text-box">
+	<h1> The Mission
+	</h1>
+	<a href="http://www.cs.mcgill.ca/~dmusti/comp206/riddle.html">
+		<div id="mission">
+		</div>
+	</a>
+</div>
+	
+<div id="location-box">
+	<table border="0" align="center">
+		<tr>
+			<td> <p> Destiny(US LAB) </p>
+			</td>
+			<td id="pad">
+			</td>
+			<td> <p> Tranquility (Node 3)</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="http://cs.mcgill.ca/~jhalpe5/RoomPage.html">
+					<div id="destiny">
+					</div>
+				</a>
+			</td>
+			<td id="pad">
+			</td>
+			<td>
+				<a href="http://www.cs.mcgill.ca/~ychen225/COMP206/room.html">
+					<div id="tranquility">
+					</div>
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td> <p> Exoplanet #1029 </p>
+			</td>
+			<td id="pad">
+			</td>
+			<td> <p> The Cupola </p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="http://www.cs.mcgill.ca/~bxu14/ass4/">
+					<div id="exoplanet">
+					</div>
+				</a>
+			</td>
+			<td id="pad">
+			</td>
+			<td>
+				<a href="http://cs.mcgill.ca/~hdevri/bumblebeeRoom.html">
+					<div id="cupola">
+					</div>
+				</a>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div id="text-box">
+	<a href=""> Look around </a>
+</div>
+</body>
+
+</html>
