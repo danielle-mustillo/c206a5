@@ -5,28 +5,58 @@ import re
 #some shit here
 form = cgi.FieldStorage()
 
-#parse input data
-page = form.getvalue('page')
-coins = form.getvalue('coins')
-gamestatus = form.getvalue('gamestatus')
-inventory1 = form.getvalue('inventory1')
-inventory2 = form.getvalue('inventory2')
-inventory3 = form.getvalue('inventory3')
-inventory4 = form.getvalue('inventory4')
-inventory5 = form.getvalue('inventory5')
-command = form.getvalue('command')
+"""get the input data from the form.
+if there is data that doesn't exist for some reason (incorrect feeding page, etc), 
+then just initialize to default commands. 
+"""
+global page
+global coins
+global gamestatus
+global inventory1
+global inventory2
+global inventory3
+global inventory4
+global inventory5
+global command
 
+if form.has_key('page'):
+	page = form.getvalue('page')
+else:
+	page = 'room'
+if form.has_key('coins'):
+	coins = form.getvalue('coins')
+else:
+	coins = '100'
+if form.has_key('gamestatus'):
+	gamestatus = form.getvalue('gamestatus')
+else:
+	gamestatus = ""
+if form.has_key('inventory1'):
+	inventory1 = form.getvalue('inventory1')
+else:
+	inventory1 = ""
+if form.has_key('inventory2'):
+	inventory2 = form.getvalue('inventory2')
+else:
+	inventory2 = ""
+if form.has_key('inventory3'):
+	inventory3 = form.getvalue('inventory3')
+else:
+	inventory3 = ""
+if form.has_key('inventory4'):
+	inventory4 = form.getvalue('inventory4')
+else:
+	inventory4 = ''
+if form.has_key('inventory5'):
+	inventory5 = form.getvalue('inventory5')
+else:
+	inventory5 = ""
+if form.has_key('command'):
+	command = form.getvalue('command')
+else:
+	command = ""
 
 print "Content-Type: text/html\n\n"
-
-#initialize the coins if it wasn't initialized already.
-if str(coins)=="None":
-	coins = 100
-	inventory1 = ""
-	inventory2 = ""
-	inventory3 = ""
-	inventory4 = ""
-	inventory5 = ""	
 
 #convert the coin value to an integer for processing
 try:
@@ -34,6 +64,7 @@ try:
 except ValueError:
 	print "problem"
 
+#reassign the gamestatus so the actions are not counted more than once (don't always get points)
 if str(gamestatus)=="right":
 	gamestatus = "right2"
 	coins += 50
@@ -48,84 +79,92 @@ try:
 except IOError:
 	rfile = open("INVENTORY.CSV", "w")
 
-#each line is a new item
+#each line is a new item, remove trailing backslash n. File is assumed to be a large file separated by backslash n.
 lines = rfile.readlines();
-#lines[i] = lines[i].rstrip('\n')
-print lines
+for i in range(0,len(lines)):
+	lines[i] = lines[i].rstrip()
 
 #tells the user what last happened (right, wrong, or haven't played)
 temp = str(command).split(' ')
-print temp
 
-global rfile
 if temp[0]=="drop":
 	try:
 		val = int(temp[1])
-		if val==1 and inventory1<>"None":
+		if val > 5 or val < 1:
+			gamemessage = "Inventory location %d doesn't exist!!!" % val
+		elif val==1 and inventory1<>"":
 			lines.append(str(inventory1))
 			gamemessage = 'You now dropped %s' % inventory1
-			inventory1 = 'None'
-		elif val==2 and inventory2<>"None":
+			inventory1 = ''
+		elif val==2 and inventory2<>"":
 			lines.append(str(inventory2))
 			gamemessage = 'You now dropped %s' % inventory2
-			inventory2 = 'None'
-		elif val==3 and inventory3<>"None":
+			inventory2 = ''
+		elif val==3 and inventory3<>"":
 			lines.append(str(inventory3))
 			gamemessage = 'You now dropped %s' % inventory3
-			inventory3 = 'None'
-		elif val==4 and inventory4<>"None":
+			inventory3 = ''
+		elif val==4 and inventory4<>"":
 			lines.append(str(inventory4))
 			gamemessage = 'You now dropped %s' % inventory4
-			inventory4 = 'None'
-		elif val==5 and inventory5<>"None":
+			inventory4 = ''
+		elif val==5 and inventory5<>"":
 			lines.append(str(inventory5))
 			gamemessage = 'You now dropped %s' % inventory5
-			inventory5 = 'None'
+			inventory5 = ''
+		else:
+			gamemessage = "Inventory slot %d doesn't have anything" % val
 	except ValueError:
-		print "problem"
+		gamemessage = "I dont understand commander. Please tell me like this: \"drop #\""
+#show all equiped items in inventory. 
 elif temp[0]=="inventory":
-	gamemessage = " 1. %s" % inventory1
+	gamemessage = "Captain, your pack: "
+	gamemessage += "<br> 1. %s" % inventory1
 	gamemessage += "<br> 2. %s" % inventory2
 	gamemessage += "<br> 3. %s" % inventory3
 	gamemessage += "<br> 4. %s" % inventory4
 	gamemessage += "<br> 5. %s" % inventory5
+#show all the items in inventory.csv. 
 elif temp[0]=="look":
 	gamemessage = "Captain! Your equipement for battle: "
 	for i in range(0, len(lines)):
 		gamemessage = "%s<br> %d. %s" % (gamemessage,i,lines[i])
+#here is the pickup command. Assumed correct input. 
 elif temp[0]=="pickup":
 	try:
 		val = int(temp[1])
-		if len(lines) < val or val < 0:
-			gamemessage = "I dont understand"
-		elif inventory1=="None":
+		if len(lines) <= val or val < 0:
+			gamemessage = "Item %d does not exist" % val
+		elif str(inventory1)=="":
 			gamemessage = "Your are now equiping: %s" % lines[val]
 			inventory1 = lines[val]
 			lines.remove(lines[val])
-		elif inventory2=="None":
-			gamemessage = "You are now equiping:"
+		elif str(inventory2)=="":
+			gamemessage = "You are now equiping: %s" % lines[val]
 			inventory2 = lines[val]
 			lines.remove(lines[val])
-		elif inventory3=="None":
-			gamemessage = "You are now equiping:"
+		elif str(inventory3)=="":
+			gamemessage = "You are now equiping: %s" % lines[val]
 			inventory3 = lines[val]
 			lines.remove(lines[val])
-		elif inventory4=="None":
-			gamemessage = "Fuck"
+		elif str(inventory4)=="":
+			gamemessage = "You are now equiping: %s" % lines[val]
 			inventory4 = lines[val]
 			lines.remove(lines[val])
-		elif inventory5=="None":
-			gamemessage = "fuck"
+		elif str(inventory5)=="":
+			gamemessage = "You are now equiping: %s" % lines[val]
 			inventory5 = lines[val]
 			lines.remove(lines[val])
+		else: gamemessage = "Your pack is full commander!"
 	except ValueError:
-		gamemessage = "I don't understand commander"
+		gamemessage = "I don't understand commanderi. Please type \"pickup #\""
+#if the user enters garbage as an order, or just nothing, these default statuses are displayed. 
 else: 
 	gamemessage = "In Orbit"
 	if str(gamestatus)=="right2":
-		gamemessage = "<font color=\"green\">Take Off!! You have: %s dollars </font>" % coins
+		gamemessage = "<font color=\"green\">Houston, Tranquility Base here. The eagle has landed... You have: %s dollars </font>" % coins
 	elif str(gamestatus)=="wrong2":
-		gamemessage = "<font color=\"red\">Housten, we have a problem. You have: %s dollars</font>" % coins
+		gamemessage = "<font color=\"red\">Housten, we have a problem... You have: %s dollars</font>" % coins
 
 #now just write everything that has changed back to the file.
 #if nothing changed, then just rewrite old information.
@@ -133,9 +172,12 @@ rfile.close()
 wfile = open("INVENTORY.CSV", 'w')
 for line in lines:
 	wfile.write(line)
+	wfile.write('\n')
 wfile.close()
 
-if form.getvalue('page')=="riddle":
+if coins <= 0:
+	print '<a href="http://www.cs.mcgill.ca/~hzhao28/ass5/index.html"> You lost!!! You should log back in </a>'
+elif form.getvalue('page')=="riddle":
 	print """
 	<html>
                 <head>
@@ -249,11 +291,11 @@ if form.getvalue('page')=="riddle":
 	print "	<input type=\"hidden\" name=\"page\" value=\"room\">"
 	#do not need game status, that is handled below!
 	print "	<input type=\"hidden\" name=\"coins\" value=\"%d\">" % coins 
-	print "	<input type=\"hidden\" name=\"inventory1\" value=\"\"> "
-	print "	<input type=\"hidden\" name=\"inventory2\" value=\"\"> "
-	print "	<input type=\"hidden\" name=\"inventory3\" value=\"\"> " 
-	print "	<input type=\"hidden\" name=\"inventory4\" value=\"\"> "
-	print "	<input type=\"hidden\" name=\"inventory5\" value=\"\"> "
+	print "	<input type=\"hidden\" name=\"inventory1\" value=\"%s\"> " % inventory1
+	print "	<input type=\"hidden\" name=\"inventory2\" value=\"%s\"> " % inventory2
+	print "	<input type=\"hidden\" name=\"inventory3\" value=\"%s\"> " % inventory3
+	print "	<input type=\"hidden\" name=\"inventory4\" value=\"%s\"> " % inventory4
+	print "	<input type=\"hidden\" name=\"inventory5\" value=\"%s\"> " % inventory5
 	print """ <table border="0">
                                 <tr>
                                         <td> <p> Answer: </p> </td>
@@ -271,10 +313,19 @@ if form.getvalue('page')=="riddle":
                 </form>
         </div>
         <div id="text-box">
-                <p> Because it already had a million degrees! </p>
                 <br>
-                <p> <a href="http://www.cs.mcgill.ca/~dmusti/comp206/ass5/room.html">Back to Command Center </a> </p>
-        </div>
+		<form name="back" action="game.py" method="post">
+			<input type="hidden" name="page" value="room">"""
+	print '		<input type="hidden" name="coins" value="%d">' % coins
+	print '	 	<input type="hidden" name="inventory1" value="%s">' % inventory1
+	print ' 	<input type="hidden" name="inventory2" value="%s">' % inventory2
+	print '		<input type="hidden" name="inventory3" value="%s">' % inventory3
+	print '		<input type="hidden" name="inventory4" value="%s">' % inventory4
+	print '		<input type="hidden" name="inventory5" value="%s">' % inventory5
+	print '		<input type="hidden" name="command" value="%s">' % command
+        print """	<input type="submit" value="Back to Command Center">
+		</form>        
+	</div>
 
 
 </body>
@@ -433,12 +484,12 @@ else:
 	<form action="http://www.cs.mcgill.ca/~dmusti/comp206/ass5/game.py" method="POST"> """
 	print	"<input type=\"hidden\" name=\"coins\" value=\"%s\">" % coins
 	print	'<input type="hidden" name="gamestatus" value="%s"> ' % gamestatus
-	print	"<input type=\"hidden\" name=\"inventory1\" value=\"\">"
-	print	"<input type=\"hidden\" name=\"inventory2\" value=\"\">"
-	print	"<input type=\"hidden\" name=\"inventory3\" value=\"\">"
-	print	"<input type=\"hidden\" name=\"inventory4\" value=\"\">"
-	print	"<input type=\"hidden\" name=\"inventory5\" value=\"\">"
-	print	"<input type=\"hidden\" name=\"command\" value=\"\">"
+	print	"<input type=\"hidden\" name=\"inventory1\" value=\"%s\">" % inventory1
+	print	"<input type=\"hidden\" name=\"inventory2\" value=\"%s\">" % inventory2
+	print	"<input type=\"hidden\" name=\"inventory3\" value=\"%s\">" % inventory3
+	print	"<input type=\"hidden\" name=\"inventory4\" value=\"%s\">" % inventory4
+	print	"<input type=\"hidden\" name=\"inventory5\" value=\"%s\">" % inventory5
+	print	"<input type=\"hidden\" name=\"command\" value=\"%s\">" % command
 	print	"<input type=\"hidden\" name=\"page\" value=\"riddle\">"
 	print """	<input type="submit" value="" id="mission"> </input>
 	</form>
